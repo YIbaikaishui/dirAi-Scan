@@ -1,0 +1,53 @@
+# 忽略系统和编辑器生成的文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+*.sublime-workspace
+*.sublime-project
+
+# 忽略 Go 项目中常见的临时文件和目录
+*.go.sum
+*.go.mod
+*.out
+*.exe
+*.test
+*.prof
+*.cache
+*.log
+
+# 忽略构建生成的文件和目录
+bin/
+build/
+dist/
+pkg/
+
+# 忽略 IDE 或工具生成的文件
+.idea/
+.vscode/
+*.iml
+*.ipynb_checkpoints/
+
+# 忽略特定文件
+.cursorrules
+1.txt
+
+# 忽略 Go 项目中常见的测试和临时文件
+_test/
+_test.go
+*.test
+
+# 忽略 Docker 相关文件
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# # 忽略其他可能不需要提交的文件
+# *.env
+# *.env.example
+# *.json
+# *.yml
+# *.yaml
