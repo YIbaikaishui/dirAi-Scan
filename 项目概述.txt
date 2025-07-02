@@ -1,0 +1,30 @@
+├── cmd/
+│   └── dirmap/                 # CLI 可执行程序入口
+│       ├── main.go             # 解析命令行参数、组装依赖、执行核心逻辑
+│       └── commands/           # 子命令定义（如 scan、analyze、version）
+│           ├── scan.go
+│           └── analyze.go
+├── configs/                    # 配置模板（JSON/YAML/TOML）
+│   └── dirmap.yaml
+├── internal/
+│   ├── app/                    # 应用服务层（Use Case）
+│   │   ├── scan_service.go     # ScanService 接口及实现
+│   │   └── analyze_service.go  # AnalyzeService 接口及实现
+│   ├── domain/                 # 领域模型与接口定义
+│   │   ├── model/              # 实体 & 值对象
+│   │   └── service/            # 领域服务接口（AI、Scheduler）
+│   ├── infra/                  # 基础设施实现
+│   │   ├── ai/                 # AI 服务插件（Ollama、OpenAI）
+│   │   ├── messaging/          # 本地队列或文件任务队列实现
+│   │   └── logging/            # Zap + OpenTelemetry（可选）
+│   └── pkg/                    # 可复用工具包
+│       ├── config/             # Viper 封装：多格式 + 热重载
+│       ├── di/                 # Uber‑dig/fx 依赖注入
+│       ├── errors/             # 统一错误 & 重试策略
+│       └── utils/              # 小工具函数
+├── plugins/                    # 动态加载插件目录（可选）
+│   └── mycustom/               # 自定义扫描或分析插件
+├── scripts/                    # 构建、打包、发布脚本
+└── test/
+    ├── unit/                   # 单元测试
+    └── integration/            # 集成测试（如模拟 AI 服务、本地队列）

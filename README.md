@@ -1,172 +1,300 @@
-🚀 DirAI-Scan
+# DirAI-Scan
 
-**下一代高并发智能 Web 扫描器 | 基于 Go 语言与 AI 增强**
-**版本**: v0.1.0
+一个基于AI增强的目录扫描工具，采用现代化的Go架构设计。
 
----
+## 项目特性
 
-## 🔍 项目简介
+- 🚀 **高性能扫描**: 基于协程的并发扫描，支持自定义并发数
+- 🤖 **AI智能分析**: 集成AI模型对扫描结果进行智能分析和风险评估
+- 📊 **多格式输出**: 支持JSON、YAML、CSV等多种输出格式
+- ⚙️ **灵活配置**: 基于YAML的配置文件，支持环境变量覆盖
+- 🔧 **模块化设计**: 采用DDD架构，代码结构清晰，易于扩展
+- 📝 **完善日志**: 基于zap的结构化日志，支持日志轮转
+- 🔌 **插件系统**: 支持插件扩展，可自定义扫描逻辑
+- 🌐 **分布式支持**: 支持分布式扫描，可横向扩展
 
-DirAI-Scan 是一个高性能、模块化的 Web 资源扫描工具，结合 **Go 语言的高并发能力** 和 **AI 智能分析**，支持快速识别 Web 资源、技术栈及潜在漏洞。
+## 项目结构
 
-### 核心特性
+```
+dirAi-Scan/
+├── cmd/                    # 命令行入口
+│   └── dirmap/
+│       ├── main.go        # 主程序入口
+│       └── commands/      # Cobra命令定义
+│           ├── root.go    # 根命令
+│           ├── scan.go    # 扫描命令
+│           └── analyze.go # 分析命令
+├── internal/              # 内部包
+│   ├── domain/           # 领域层
+│   │   ├── model/        # 领域模型
+│   │   └── service/      # 领域服务
+│   ├── infra/           # 基础设施层
+│   │   ├── ai/          # AI服务实现
+│   │   ├── logging/     # 日志服务
+│   │   └── messaging/   # 消息队列
+│   └── pkg/             # 内部工具包
+│       ├── config/      # 配置管理
+│       ├── di/          # 依赖注入
+│       ├── errors/      # 错误处理
+│       └── utils/       # 工具函数
+├── configs/             # 配置文件
+│   └── dirmap.yaml     # 主配置文件
+├── data/               # 数据文件
+│   ├── common.txt     # 通用字典
+│   ├── paths.txt      # 路径字典
+│   └── dicc.txt       # 目录字典
+├── logs/              # 日志目录
+├── results/           # 扫描结果
+├── plugins/           # 插件目录
+├── go.mod            # Go模块文件
+├── go.sum            # 依赖校验文件
+└── README.md         # 项目说明
+```
 
-- **高并发扫描引擎**：支持大规模目标的快速探测。
-- **AI 智能决策**：基于 Ollama 的 AI 模型（如 `qwen3:4b`）辅助分析结果。
-- **多模式扫描**：支持 `fast`（快速）、`deep`（深度）、`stealth`（隐蔽）模式。
-- **现代技术栈识别**：精准识别前端框架、后端语言、CMS 等。
-- **分布式支持**：支持控制器（`controller`）与工作节点（`worker`）架构。
+## 快速开始
 
----
-
-## 📦 安装指南
-
-### 1. **从 Go 模块安装**
+### 安装依赖
 
 ```bash
-go install github.com/yourusername/diraiscan@latest
+go mod tidy
 ```
 
-### 2. **从源码构建**
+### 构建项目
 
 ```bash
-git clone https://github.com/yourusername/diraiscan.git
-cd diraiscan
-go build -o diraiscan
+go build -o dirmap ./cmd/dirmap
 ```
 
----
+### 基本使用
 
-## 🛠️ 使用说明
-
-### 1. **基础命令**
+#### 1. 扫描目标
 
 ```bash
-diraiscan [flags]
-diraiscan [command]
+# 基本扫描
+./dirmap scan -u http://example.com
+
+# 指定字典文件
+./dirmap scan -u http://example.com -w data/common.txt
+
+# 启用AI分析
+./dirmap scan -u http://example.com --ai-enable --ai-model deepseek-r1
+
+# 自定义并发数和超时
+./dirmap scan -u http://example.com -t 100 --timeout 10s
 ```
 
-### 2. **可用命令**
-
-
-| 命令         | 描述                    |
-| ------------ | ----------------------- |
-| `scan`       | 开始扫描目标 URL        |
-| `version`    | 显示版本信息            |
-| `help`       | 显示帮助信息            |
-| `completion` | 生成 Shell 自动补全脚本 |
-
-### 3. **常用标志**
-
-
-| 标志               | 描述                               | 默认值        |
-| ------------------ | ---------------------------------- | ------------- |
-| `-u, --url`        | 目标 URL（必填）                   | N/A           |
-| `-t, --threads`    | 并发线程数                         | `50`          |
-| `-m, --mode`       | 扫描模式：`fast`/`deep`/`stealth`  | `fast`        |
-| `-o, --output`     | 输出文件路径（支持 JSON/CSV/HTML） | N/A           |
-| `--ai-enable`      | 启用 AI 分析（需 Ollama 服务）     | `false`       |
-| `--proxy`          | 代理服务器（支持 HTTP/SOCKS5）     | N/A           |
-| `--exclude-status` | 排除指定状态码的结果               | `404`         |
-| `--status-codes`   | 仅显示指定状态码的结果             | `200,403,500` |
-
-### 4. **完整参数列表**
-
-运行 `diraiscan --help` 查看所有参数详情。
-
----
-
-## 🧪 示例用法
-
-### 1. **基础扫描**
+#### 2. 分析结果
 
 ```bash
-diraiscan -u https://example.com
+# 分析扫描结果
+./dirmap analyze -f results/scan_results_example.com_20240101_120000.json
+
+# 指定AI模型进行分析
+./dirmap analyze -f results/scan_results.json --ai-model deepseek-r1
 ```
 
-### 2. **启用 AI 分析**
+### 配置文件
+
+项目使用YAML格式的配置文件，位于 `configs/dirmap.yaml`。主要配置项包括：
+
+```yaml
+# 应用配置
+app:
+  name: "DirAI-Scan"
+  version: "1.0.0"
+  debug: false
+
+# 扫描配置
+scan:
+  concurrency: 50
+  timeout: "5s"
+  retries: 3
+  delay: "0ms"
+
+# AI配置
+ai:
+  enabled: false
+  endpoint: "http://localhost:11434"
+  model: "deepseek-r1"
+  timeout: "30s"
+
+# 日志配置
+logging:
+  level: "info"
+  dir: "./logs"
+  max_size: 100
+  max_backups: 3
+```
+
+### 环境变量
+
+支持通过环境变量覆盖配置：
 
 ```bash
-diraiscan -u https://example.com --ai-enable --ai-model qwen3:4b
+export DIRAISCAN_AI_ENABLED=true
+export DIRAISCAN_AI_ENDPOINT=http://localhost:11434
+export DIRAISCAN_AI_MODEL=deepseek-r1
+export DIRAISCAN_SCAN_CONCURRENCY=100
 ```
 
-### 3. **自定义配置与输出**
+## 架构设计
+
+### 领域驱动设计 (DDD)
+
+项目采用DDD架构，分为以下几层：
+
+1. **领域层 (Domain Layer)**
+   - `model/`: 核心业务模型和实体
+   - `service/`: 领域服务接口
+
+2. **基础设施层 (Infrastructure Layer)**
+   - `ai/`: AI服务的具体实现
+   - `logging/`: 日志服务实现
+   - `messaging/`: 消息队列实现
+
+3. **应用层 (Application Layer)**
+   - `commands/`: 命令行接口实现
+
+4. **工具层 (Utility Layer)**
+   - `config/`: 配置管理
+   - `di/`: 依赖注入容器
+   - `errors/`: 统一错误处理
+
+### 核心组件
+
+#### 1. 配置管理
+
+基于Viper的配置管理系统，支持：
+- YAML配置文件
+- 环境变量覆盖
+- 配置热重载
+- 配置验证
+
+#### 2. 日志系统
+
+基于Zap的高性能日志系统：
+- 结构化日志
+- 日志轮转
+- 多级别日志
+- 文件和控制台输出
+
+#### 3. 依赖注入
+
+轻量级DI容器：
+- 服务注册和解析
+- 工厂模式支持
+- 生命周期管理
+
+#### 4. 错误处理
+
+统一的错误处理机制：
+- 错误码定义
+- 错误包装和链式调用
+- 调用栈追踪
+
+## 开发指南
+
+### 添加新功能
+
+1. **定义领域模型**: 在 `internal/domain/model/` 中定义新的实体和值对象
+2. **定义服务接口**: 在 `internal/domain/service/` 中定义服务接口
+3. **实现基础设施**: 在 `internal/infra/` 中实现具体的服务
+4. **添加命令**: 在 `cmd/dirmap/commands/` 中添加新的命令
+5. **更新配置**: 在配置文件中添加相关配置项
+
+### 代码规范
+
+- 遵循Go官方代码规范
+- 使用有意义的变量和函数名
+- 添加必要的注释和文档
+- 编写单元测试
+- 使用依赖注入而非全局变量
+
+### 测试
 
 ```bash
-diraiscan -u https://example.com -c config.json -o results.json --verbose
+# 运行所有测试
+go test ./...
+
+# 运行特定包的测试
+go test ./internal/pkg/config
+
+# 生成测试覆盖率报告
+go test -coverprofile=coverage.out ./...
+go tool cover -html=coverage.out
 ```
 
-### 4. **分布式模式（控制器 + 工作节点）**
+## 部署
 
-- 启动控制器：
-  ```bash
-  diraiscan --distribute controller
-  ```
-- 启动工作节点：
-  ```bash
-  diraiscan --distribute worker
-  ```
+### 单机部署
 
----
+```bash
+# 构建二进制文件
+go build -o dirmap ./cmd/dirmap
 
-## ⚙️ 配置管理
+# 创建配置文件
+cp configs/dirmap.yaml /etc/diraiscan/
 
-### 1. **配置文件**
-
-- 默认配置文件：`config.json`
-- 支持字段：
-  - 扫描线程数、超时时间、用户代理
-  - 日志目录与级别
-  - 输出格式（JSON/CSV/HTML）
-  - AI 模型参数（模型名、API 密钥、端点）
-
-### 2. **环境变量（.env）**
-
-- 敏感信息（如 API 密钥）应存储在 `.env` 文件中。
-- 示例 `.env`：
-  ```env
-  AI_KEY=your_api_key_here
-  AI_ENDPOINT=http://localhost:11434
-  AI_ENABLED=true
-  ```
-
----
-
-## 📁 项目结构
-
-```
-diraiscan/
-├── config/              # 配置管理模块
-│   └── config.go        # 配置加载与默认值
-├── main.go              # 程序入口
-├── .env                 # 敏感配置（需 .gitignore）
-├── config.json          # 主配置文件
-└── README.md            # 项目文档
+# 运行
+./dirmap scan -u http://example.com
 ```
 
----
+### Docker部署
 
-## 🤝 贡献指南
+```dockerfile
+FROM golang:1.21-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN go mod tidy && go build -o dirmap ./cmd/dirmap
 
-欢迎提交 Issue 和 Pull Request！
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /app/dirmap .
+COPY --from=builder /app/configs ./configs
+COPY --from=builder /app/data ./data
+CMD ["./dirmap"]
+```
 
-- 提交前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)（如未创建，请补充）。
-- 确保代码符合 Go 编码规范，并通过单元测试。
+### 分布式部署
 
----
+1. **控制器节点**:
+```bash
+./dirmap --mode controller --bind 0.0.0.0:8080
+```
 
-## 📄 许可证
+2. **工作节点**:
+```bash
+./dirmap --mode worker --controller http://controller:8080
+```
 
-本项目采用 MIT License。详情见 [LICENSE](LICENSE) 文件。
+## 贡献
 
----
+欢迎提交Issue和Pull Request！
 
-## 📣 联系方式
+### 贡献流程
 
-- 作者：你的名字
-- 邮箱：your@email.com
-- GitHub：[https://github.com/yourusername/diraiscan](https://github.com/yourusername/diraiscan)
+1. Fork项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建Pull Request
 
----
+## 许可证
 
-将以上内容保存为 `README.md` 文件，并根据实际项目信息调整 GitHub 仓库地址、作者信息等。此文档结构清晰，适合开发者快速上手和贡献代码。
+本项目采用MIT许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+## 更新日志
+
+### v1.0.0
+- 初始版本发布
+- 基础扫描功能
+- AI分析集成
+- 配置管理系统
+- 日志系统
+- 依赖注入容器
+
+## 联系方式
+
+- 项目主页: [GitHub](https://github.com/diraiscan/dirAi-Scan)
+- 问题反馈: [Issues](https://github.com/diraiscan/dirAi-Scan/issues)

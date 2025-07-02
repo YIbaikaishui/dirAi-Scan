@@ -10,8 +10,6 @@ Thumbs.db
 *.sublime-project
 
 # 忽略 Go 项目中常见的临时文件和目录
-*.go.sum
-*.go.mod
 *.out
 *.exe
 *.test
@@ -23,7 +21,7 @@ Thumbs.db
 bin/
 build/
 dist/
-pkg/
+.promptx/
 
 # 忽略 IDE 或工具生成的文件
 .idea/
@@ -45,7 +43,7 @@ _test.go
 Dockerfile
 docker-compose.yml
 
-# # 忽略其他可能不需要提交的文件
+# 忽略其他可能不需要提交的文件
 # *.env
 # *.env.example
 # *.json

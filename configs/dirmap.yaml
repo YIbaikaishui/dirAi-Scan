@@ -1,0 +1,155 @@
+# DirAI-Scan 配置文件
+
+# 基础配置
+app:
+  name: "DirAI-Scan"
+  version: "1.0.0"
+  debug: false
+
+# 日志配置
+logging:
+  level: "info"  # debug, info, warn, error
+  dir: "./logs"
+  max_size: 100  # MB
+  max_backups: 3
+  max_age: 28    # days
+  compress: true
+
+# 扫描配置
+scan:
+  # 默认扫描参数
+  concurrency: 50
+  timeout: "5s"
+  retries: 3
+  delay: "0ms"
+  
+  # 状态码过滤
+  status_codes:
+    include: [200, 201, 202, 204, 301, 302, 303, 307, 308, 403, 401, 405, 500, 502, 503]
+    exclude: [404]
+  
+  # 响应大小过滤
+  response_size:
+    min: 0
+    max: 10485760  # 10MB
+    exclude_sizes: []
+  
+  # 用户代理
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+
+# AI配置
+ai:
+  enabled: false
+  endpoint: "http://localhost:11434"
+  model: "deepseek-r1"
+  timeout: "30s"
+  max_retries: 3
+  
+  # AI分析配置
+  analysis:
+    confidence_threshold: 0.7
+    max_findings: 10
+    risk_levels: ["low", "medium", "high"]
+
+# 网络配置
+network:
+  # 代理设置
+  proxy:
+    enabled: false
+    url: ""
+    username: ""
+    password: ""
+  
+  # 速率限制
+  rate_limit:
+    enabled: false
+    requests_per_second: 10
+    burst: 20
+  
+  # DNS配置
+  dns:
+    servers: ["8.8.8.8", "1.1.1.1"]
+    timeout: "3s"
+
+# 输出配置
+output:
+  format: "json"  # json, yaml, csv, txt
+  directory: "./results"
+  filename_template: "scan_results_{{.target}}_{{.timestamp}}"
+  
+  # 报告配置
+  report:
+    enabled: true
+    template: "default"
+    include_screenshots: false
+    include_raw_responses: false
+
+# 插件配置
+plugins:
+  enabled: false
+  directory: "./plugins"
+  auto_load: []
+  
+# 字典配置
+dictionaries:
+  directory: "./data"
+  files:
+    - "common.txt"
+    - "paths.txt"
+    - "dicc.txt"
+  
+  # 自定义字典
+  custom:
+    enabled: false
+    paths: []
+
+# 安全配置
+security:
+  # 请求头
+  headers:
+    "User-Agent": "DirAI-Scan/1.0"
+    "Accept": "*/*"
+    "Accept-Language": "en-US,en;q=0.9"
+    "Accept-Encoding": "gzip, deflate"
+    "Connection": "keep-alive"
+  
+  # Cookie配置
+  cookies:
+    enabled: false
+    jar_file: ""
+  
+  # TLS配置
+  tls:
+    verify: true
+    min_version: "1.2"
+    max_version: "1.3"
+
+# 分布式配置
+distributed:
+  enabled: false
+  mode: "standalone"  # standalone, controller, worker
+  
+  # 控制器配置
+  controller:
+    bind_address: "0.0.0.0:8080"
+    auth_token: ""
+  
+  # 工作节点配置
+  worker:
+    controller_url: ""
+    auth_token: ""
+    max_tasks: 10
+
+# 监控配置
+monitoring:
+  enabled: false
+  metrics_port: 9090
+  health_check_port: 8081
+  
+  # Prometheus配置
+  prometheus:
+    enabled: false
+    endpoint: "/metrics"

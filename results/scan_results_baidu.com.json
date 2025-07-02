@@ -1,0 +1,20 @@
+[
+    {
+        "url": "/",
+        "status_code": 302,
+        "content_length": 161,
+        "headers": {
+            "Cache-Control": "privae",
+            "Connection": "Keep-Alive",
+            "Content-Length": "161",
+            "Content-Type": "text/html",
+            "Date": "Wed, 28 May 2025 14:51:09 GMT",
+            "Expires": "Thu, 29 May 2025 14:51:09 GMT",
+            "Location": "https://www.baidu.com/",
+            "Server": "bfe/1.0.8.18"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 6275894700,
+        "body_hash": "f9ae0e69a566407c669d0b2b634e3499"
+    }
+]

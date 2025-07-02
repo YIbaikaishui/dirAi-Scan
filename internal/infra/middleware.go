@@ -8,19 +8,16 @@ import (
 	"golang.org/x/time/rate"
 )
 
-// RateLimiter 请求速率限制中间件
 type RateLimiter struct {
 	limiter *rate.Limiter
 }
 
-// NewRateLimiter 创建速率限制器
 func NewRateLimiter(requestsPerSecond float64) *RateLimiter {
 	return &RateLimiter{
 		limiter: rate.NewLimiter(rate.Limit(requestsPerSecond), 1),
 	}
 }
 
-// WrapClient 包装HTTP客户端添加速率限制
 func (r *RateLimiter) WrapClient(client *http.Client) *http.Client {
 	transport := client.Transport
 	if transport == nil {
@@ -35,7 +32,6 @@ func (r *RateLimiter) WrapClient(client *http.Client) *http.Client {
 	return client
 }
 
-// rateLimitedTransport 实现速率限制的传输层
 type rateLimitedTransport struct {
 	base    http.RoundTripper
 	limiter *rate.Limiter
@@ -49,22 +45,20 @@ func (t *rateLimitedTransport) RoundTrip(req *http.Request) (*http.Response, err
 	return t.base.RoundTrip(req)
 }
 
-// ProxyClient 代理客户端配置
 type ProxyClient struct {
 	proxyURL *url.URL
 }
 
-// NewProxyClient 创建代理客户端
 func NewProxyClient(proxyAddr string) (*ProxyClient, error) {
 	proxyURL, err := url.Parse(proxyAddr)
 	if err != nil {
 		return nil, err
 	}
 
-	return &ProxyClient{proxyURL: proxyURL}, nil
+	return &ProxyClient{proxyURL: proxyURL},
+		nil
 }
 
-// WrapClient 包装HTTP客户端添加代理
 func (p *ProxyClient) WrapClient(client *http.Client) *http.Client {
 	transport := client.Transport
 	if transport == nil {
@@ -78,14 +72,12 @@ func (p *ProxyClient) WrapClient(client *http.Client) *http.Client {
 	return client
 }
 
-// RetryClient 重试客户端配置
 type RetryClient struct {
 	maxRetries  int
 	retryDelay  time.Duration
 	retryStatus []int
 }
 
-// NewRetryClient 创建重试客户端
 func NewRetryClient(maxRetries int, retryDelay time.Duration, retryStatus []int) *RetryClient {
 	return &RetryClient{
 		maxRetries:  maxRetries,
@@ -94,7 +86,6 @@ func NewRetryClient(maxRetries int, retryDelay time.Duration, retryStatus []int)
 	}
 }
 
-// WrapClient 包装HTTP客户端添加重试机制
 func (r *RetryClient) WrapClient(client *http.Client) *http.Client {
 	transport := client.Transport
 	if transport == nil {
@@ -111,7 +102,6 @@ func (r *RetryClient) WrapClient(client *http.Client) *http.Client {
 	return client
 }
 
-// retryTransport 实现重试机制的传输层
 type retryTransport struct {
 	base        http.RoundTripper
 	maxRetries  int

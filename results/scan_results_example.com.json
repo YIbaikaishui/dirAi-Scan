@@ -1,0 +1,19 @@
+[
+    {
+        "url": "/",
+        "status_code": 200,
+        "content_length": 1256,
+        "headers": {
+            "Cache-Control": "max-age=2055",
+            "Connection": "keep-alive",
+            "Content-Length": "1256",
+            "Content-Type": "text/html",
+            "Date": "Wed, 28 May 2025 15:13:54 GMT",
+            "Etag": "\"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134\"",
+            "Last-Modified": "Mon, 13 Jan 2025 20:11:20 GMT"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 6576810800,
+        "body_hash": "84238dfc8092e5d9c0dac8ef93371a07"
+    }
+]

@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/diraiscan/cmd"
+	"github.com/diraiscan/cmd/dirmap/commands"
 	"github.com/diraiscan/internal/pkg/config"
 	"github.com/diraiscan/internal/pkg/utils"
 
@@ -22,7 +22,7 @@ func main() {
 	}
 
 	logConfig := config.GetConfig()
-	if err := utils.InitLogger(logConfig.Logging.Dir, logConfig.Logging.Level); err != nil {
+	if err := utils.InitLogger(logConfig.LogDir, logConfig.LogLevel); err != nil {
 		fmt.Printf("警告: 无法初始化日志: %v\n", err)
 	}
 
@@ -34,8 +34,8 @@ func main() {
 		}
 	}()
 
-	if err := cmd.Execute(); err != nil {
-		fmt.Printf("cmd.Execute() 返回错误: %v\n", err)
+	if err := commands.Execute(); err != nil {
+		fmt.Printf("commands.Execute() 返回错误: %v\n", err)
 		os.Exit(1)
 	}
 }

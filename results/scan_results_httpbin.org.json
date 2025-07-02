@@ -1,0 +1,172 @@
+[
+    {
+        "url": "https://httpbin.org/",
+        "status_code": 200,
+        "content_length": 9593,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "9593",
+            "Content-Type": "text/html; charset=utf-8",
+            "Date": "Tue, 01 Jul 2025 12:11:15 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 1113023900,
+        "body_hash": "00ba0cc0b82edbcf96153d35d923a7be"
+    },
+    {
+        "url": "https://httpbin.org/",
+        "status_code": 200,
+        "content_length": 9593,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "9593",
+            "Content-Type": "text/html; charset=utf-8",
+            "Date": "Tue, 01 Jul 2025 12:11:15 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 1163657000,
+        "body_hash": "00ba0cc0b82edbcf96153d35d923a7be"
+    },
+    {
+        "url": "https://httpbin.org/",
+        "status_code": 200,
+        "content_length": 9593,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "9593",
+            "Content-Type": "text/html; charset=utf-8",
+            "Date": "Tue, 01 Jul 2025 12:11:15 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 1192402200,
+        "body_hash": "00ba0cc0b82edbcf96153d35d923a7be"
+    },
+    {
+        "url": "https://httpbin.org/",
+        "status_code": 200,
+        "content_length": 9593,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "9593",
+            "Content-Type": "text/html; charset=utf-8",
+            "Date": "Tue, 01 Jul 2025 12:11:16 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 2062456900,
+        "body_hash": "00ba0cc0b82edbcf96153d35d923a7be"
+    },
+    {
+        "url": "https://httpbin.org/",
+        "status_code": 200,
+        "content_length": 9593,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "9593",
+            "Content-Type": "text/html; charset=utf-8",
+            "Date": "Tue, 01 Jul 2025 12:11:16 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 2155342900,
+        "body_hash": "00ba0cc0b82edbcf96153d35d923a7be"
+    },
+    {
+        "url": "https://httpbin.org/robots.txt",
+        "status_code": 200,
+        "content_length": 30,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "30",
+            "Content-Type": "text/plain",
+            "Date": "Tue, 01 Jul 2025 12:11:18 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 721050100,
+        "body_hash": "46fd03688e49c6b6b0a2b7d3553c1e42"
+    },
+    {
+        "url": "https://httpbin.org/robots.txt",
+        "status_code": 200,
+        "content_length": 30,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "30",
+            "Content-Type": "text/plain",
+            "Date": "Tue, 01 Jul 2025 12:11:19 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 231304700,
+        "body_hash": "46fd03688e49c6b6b0a2b7d3553c1e42"
+    },
+    {
+        "url": "https://httpbin.org/robots.txt",
+        "status_code": 200,
+        "content_length": 30,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "30",
+            "Content-Type": "text/plain",
+            "Date": "Tue, 01 Jul 2025 12:11:19 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 225100700,
+        "body_hash": "46fd03688e49c6b6b0a2b7d3553c1e42"
+    },
+    {
+        "url": "https://httpbin.org/robots.txt",
+        "status_code": 200,
+        "content_length": 30,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "30",
+            "Content-Type": "text/plain",
+            "Date": "Tue, 01 Jul 2025 12:11:21 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 601865800,
+        "body_hash": "46fd03688e49c6b6b0a2b7d3553c1e42"
+    },
+    {
+        "url": "https://httpbin.org/robots.txt",
+        "status_code": 200,
+        "content_length": 30,
+        "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Connection": "keep-alive",
+            "Content-Length": "30",
+            "Content-Type": "text/plain",
+            "Date": "Tue, 01 Jul 2025 12:11:23 GMT",
+            "Server": "gunicorn/19.9.0"
+        },
+        "time": "0001-01-01T00:00:00Z",
+        "response_time": 1389102600,
+        "body_hash": "46fd03688e49c6b6b0a2b7d3553c1e42"
+    }
+]
