@@ -1,3 +1,8 @@
+> [!WARNING]
+> **合法使用声明 / Legal Notice**
+> 本工具仅可用于你**拥有合法授权**的目标上进行安全测试（如授权渗透测试、自有资产盘点）。
+> 严禁对任何未经授权的第三方目标使用本工具，由此产生的任何法律后果由使用者自行承担。
+> This tool is intended **only for authorized security testing** (e.g. pentests you are permitted to perform, or assets you own). Unauthorized use against third parties is strictly prohibited.
 # DirAI-Scan
 
 一个基于AI增强的目录扫描工具，采用现代化的Go架构设计。
